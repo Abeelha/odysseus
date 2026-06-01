@@ -245,6 +245,9 @@ export function _detectToolParser(modelName) {
 // ── Backend detection ──
 
 export function _detectBackend(model) {
+  if (model?.backend === 'ollama' || model?.is_ollama) {
+    return { backend: 'ollama', label: 'Ollama' };
+  }
   const q = (model.quant || '').toUpperCase();
   const sysBackend = String(_hwfitCache?.system?.backend || '').toLowerCase();
   const isRocm = sysBackend === 'rocm';
